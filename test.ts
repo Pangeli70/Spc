@@ -5,7 +5,7 @@
  * @version 0.9.7 [APG 2023/05/13] Separation of concerns lib/src
  * ------------------------------------------------------------------------
  */
-import {  Spc } from "./test/deps.ts";
+import { Spc } from "./test/deps.ts";
 import { ApgSpcExampleSpec } from "./test/specs/ApgSpcExampleSpec.ts";
 
 
@@ -14,12 +14,12 @@ async function ApgUtsTests(arun: Spc.eApgSpcRun) {
     if (arun != Spc.eApgSpcRun.yes) return;
 
     const URI = "https://apg-tst.deno.dev/store";
-    
-    const objSpec = new ApgSpcExampleSpec();
-    objSpec.RunSync(Spc.eApgSpcRun.yes);
-    const _r1 = await objSpec.SendEventsToTestService(URI, "Uts", objSpec.CLASS_NAME);
 
-    
+    const testSpec = new ApgSpcExampleSpec();
+    if (testSpec.RunSync(Spc.eApgSpcRun.yes)) {
+        const _r1 = await testSpec.SendEventsToTestService(URI, "Spc", testSpec.CLASS_NAME);
+    }
+
     Spc.ApgSpcSpecifier.FinalReport();
 }
 

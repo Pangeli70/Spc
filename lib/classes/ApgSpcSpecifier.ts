@@ -23,6 +23,7 @@ export class ApgSpcSpecifier {
   private static _totalSuccessfull = 0;
   private static _totalFailed = 0;
   private static _totalSkipped = 0;
+  private static _lastResumeIndex = 0;
 
 
   private _events: IApgSpcEvent[] = [];
@@ -208,12 +209,11 @@ export class ApgSpcSpecifier {
     let failed = 0;
     let skipped = 0;
 
-    for (const event of this._events) {
-
+    for (let i = ApgSpcSpecifier._lastResumeIndex; i < this._events.length; i++) {
+      const event = this._events[i];
       if (event.clause == eApgSpcClause.skip) skipped++;
       if (event.clause == eApgSpcClause.success) successfull++;
       if (event.clause == eApgSpcClause.failure) failed++;
-
     }
 
     ApgSpcSpecifier._totalSkipped += skipped;
@@ -243,6 +243,7 @@ export class ApgSpcSpecifier {
       hrt: performance.now()
     }
     this._events.push(event);
+    ApgSpcSpecifier._lastResumeIndex = this._events.length;
   }
 
   /**

@@ -57,6 +57,7 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
       await this.execute();
       r = await this.mockEnd();
     }
+    return r.ok;
   }
 
   RunSync(arun: eApgSpcRun) {
@@ -67,6 +68,7 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
       this.executeSync();
       r = this.mockEndSync();
     }
+    return r.ok;
   }
 
   async SendEventsToTestService(
