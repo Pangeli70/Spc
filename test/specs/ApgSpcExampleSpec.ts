@@ -84,4 +84,16 @@ export class ApgSpcExampleSpec extends Spc.ApgSpcSpec {
     override executeSync() { 
         this.S01_Indirect();
     }
+
+    override mockInitSync() {
+        const r = super.mockInitSync();
+        console.log("MockInitSync overridden")
+        return r;
+    }
+
+    override mockEndSync() {
+        const r = super.mockEndSync();
+        console.log("MockEndSync overridden")
+        return r;
+    }
 }

@@ -54,20 +54,20 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
 
     if (arun == eApgSpcRun.no) return false;
     this.specifier.Title(this.CLASS_NAME);
-    let r = await this.specifier.MockInit();
-    if (r.message == "") {
+    let r = await this.mockInit();
+    if (r.ok) {
       await this.execute();
-      r = await this.specifier.MockEnd();
+      r = await this.mockEnd();
     }
   }
 
   RunSync(arun: eApgSpcRun) {
     if (arun == eApgSpcRun.no) return false;
     this.specifier.Title(this.CLASS_NAME);
-    let r = this.specifier.MockInitSync()
-    if (r.message == "") {
+    let r = this.mockInitSync()
+    if (r.ok) {
       this.executeSync();
-      r = this.specifier.MockEndSync();
+      r = this.mockEndSync();
     }
   }
 
