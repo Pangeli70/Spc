@@ -7,12 +7,10 @@
  * -----------------------------------------------------------------------
  */
 
-import { Uts } from "../deps.ts";
+import { Uts, Rst } from "../deps.ts";
 import { TApgSpcFlags } from "../types/TApgSpcFlags.ts";
 import { ApgSpcSpecifier } from "./ApgSpcSpecifier.ts";
 import { eApgSpcRun } from "../enums/eApgSpcRun.ts";
-import { Rst } from "../../../apg-edr/lib/deps.ts";
-
 
 /**
  * Abstract service with testing capabilities
