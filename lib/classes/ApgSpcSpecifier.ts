@@ -74,11 +74,11 @@ export class ApgSpcSpecifier {
     let msg = ""
     if (run === undefined) {
       msg = `Trying to initialize the spec [${fname}] but it is not registered in the flags object`;
-      this.#skip(msg);
+      this.Skip(msg);
       return false;
     }
     if (run == eApgSpcRun.no) {
-      this.#skip(msg);
+      this.Skip(msg);
       return false;
     }
     return true;
@@ -139,7 +139,7 @@ export class ApgSpcSpecifier {
    * @param arun Flag that indicates that the spec will be skipped or not
    * @param amessage Eventual message to justify why it was skipped
    */
-  #skip(
+  Skip(
     amessage = ""
   ) {
 

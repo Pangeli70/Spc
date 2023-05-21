@@ -19,7 +19,7 @@ import { eApgSpcRun } from "../enums/eApgSpcRun.ts";
 export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
 
   protected specifier: ApgSpcSpecifier;
-  
+
   protected flags: TApgSpcFlags = {}
 
   /**
@@ -126,14 +126,31 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
     return r;
 
   }
+
   async SendEventsToTestService(
     auri: string,
     aframework: string,
     aspecs: string,
-  ) { 
+  ) {
     await this.specifier.SendEventsToTestService(auri, aframework, aspecs);
   }
 
+
+  async mockInit() {
+    await this.specifier.MockInit();
+  }
+
+  async mockEnd() {
+    await this.specifier.MockEnd();
+  }
+
+  mockInitSync() {
+    this.specifier.MockInit();
+  }
+
+  mockEndSync() {
+    this.specifier.MockEnd();
+  }
 
 }
 

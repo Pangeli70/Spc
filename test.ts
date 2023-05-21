@@ -13,7 +13,6 @@ async function ApgUtsTests(arun: Spc.eApgSpcRun) {
 
     if (arun != Spc.eApgSpcRun.yes) return;
 
-    
     const URI = "https://apg-tst.deno.dev/store";
     
     const objSpec = new ApgSpcExampleSpec();
