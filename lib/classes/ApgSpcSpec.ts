@@ -11,6 +11,7 @@ import { Uts } from "../deps.ts";
 import { TApgSpcFlags } from "../types/TApgSpcFlags.ts";
 import { ApgSpcSpecifier } from "./ApgSpcSpecifier.ts";
 import { eApgSpcRun } from "../enums/eApgSpcRun.ts";
+import { Rst } from "../../../apg-edr/lib/deps.ts";
 
 
 /**
@@ -137,19 +138,27 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
 
 
   async mockInit() {
-    await this.specifier.MockInit();
+    const r: Rst.IApgRst = { ok: true };
+    r.payload = { signature: "IApgSpcEvent", data: await this.specifier.MockInit() };
+    return r
   }
 
   async mockEnd() {
-    await this.specifier.MockEnd();
+    const r: Rst.IApgRst = { ok: true };
+    r.payload = { signature: "IApgSpcEvent", data: await this.specifier.MockEnd() };
+    return r
   }
 
   mockInitSync() {
-    this.specifier.MockInit();
+    const r: Rst.IApgRst = { ok: true };
+    r.payload = { signature: "IApgSpcEvent", data: this.specifier.MockInitSync() };
+    return r
   }
 
   mockEndSync() {
-    this.specifier.MockEnd();
+    const r: Rst.IApgRst = { ok: true };
+    r.payload = { signature: "IApgSpcEvent", data: this.specifier.MockEndSync() };
+    return r
   }
 
 }
