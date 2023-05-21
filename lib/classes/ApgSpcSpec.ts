@@ -71,63 +71,6 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
     }
   }
 
-
-  async sendToTestService(
-    auri: string,
-    aframework: string,
-    aspecs: string,
-  ) {
-
-    const headers = {
-      'Content-Type': 'application/json'
-    };
-
-    const body = JSON.stringify({
-      framework: aframework,
-      specs: aspecs,
-      events: this.specifier.Events
-    });
-
-    const postParams: RequestInit = {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers,
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body,
-    }
-
-    let r: any;
-    try {
-      const response = await fetch(auri, postParams);
-      if (response.json) {
-        r = await response.json();
-      }
-      else {
-        r = response;
-      }
-    }
-    catch (e) {
-      console.log("Error from the Deno Deploy Test service on " + auri);
-      console.error(e);
-      return e;
-    }
-
-    // const spacer = ApgSpcService.SPACER;
-    // const resume = Std.Colors.brightGreen(
-    //   `+${spacer}\n` +
-    //   `| Remote storage (${auri}) result\n` +
-    //   `+${spacer}\n` +
-    //   `| ${JSON.stringify(r)}\n` +
-    //   `+${spacer}\n`);
-    // this.#log(resume);
-
-    return r;
-
-  }
-
   async SendEventsToTestService(
     auri: string,
     aframework: string,
