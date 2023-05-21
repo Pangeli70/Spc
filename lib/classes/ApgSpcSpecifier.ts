@@ -38,11 +38,12 @@ export class ApgSpcSpecifier {
     this._logMode = amode;
   }
 
-  #log(amessage: string) {
-    if (this._logMode == Uts.eApgUtsLogMode.verbose) {
+  #log(amessage: string, aminLevel: Uts.eApgUtsLogMode) {
+    if (this._logMode >= aminLevel) {
       console.log(amessage);
     }
   }
+ 
 
   get Events() {
     return this._events;
@@ -68,7 +69,7 @@ export class ApgSpcSpecifier {
       hrt: performance.now()
     }
     this._events.push(event);
-    const message = ("|\n+-" + fname + "\n|");
+    const message = ("\n+-" + fname + "\n|");
     console.log(message);
 
     const run = (this._specs[fname]);
@@ -110,7 +111,7 @@ export class ApgSpcSpecifier {
    */
   When(aconditions: string) {
     const message = "When " + aconditions + "...";
-    this.#log("|   " + message);
+    this.#log("|   " + message, Uts.eApgUtsLogMode.verbose);
     const event: IApgSpcEvent = {
       clause: eApgSpcClause.when,
       message: message,
@@ -125,7 +126,7 @@ export class ApgSpcSpecifier {
    */
   WeExpect(aexpect: string) {
     const message = "We expect " + aexpect;
-    this.#log("|   " + message);
+    this.#log("|   " + message, Uts.eApgUtsLogMode.verbose);
     const event: IApgSpcEvent = {
       clause: eApgSpcClause.expect,
       message: message,
@@ -150,7 +151,7 @@ export class ApgSpcSpecifier {
       message = "This test was..."
     }
 
-    this.#log("|     " + message + "\n|" + res);
+    this.#log("|     " + message + "\n|" + res, Uts.eApgUtsLogMode.silent);
 
     const event: IApgSpcEvent = {
       clause: eApgSpcClause.skip,
@@ -194,7 +195,7 @@ export class ApgSpcSpecifier {
       this._events.push(event);
 
     }
-    this.#log("|     " + message + "\n|" + res);
+    this.#log("|     " + message + "\n|" + res, Uts.eApgUtsLogMode.verbose);
   }
 
   /**
@@ -231,7 +232,7 @@ export class ApgSpcSpecifier {
       `+${spacer}\n` +
       `| ${message} \n` +
       `+${spacer}\n`);
-    console.log(resume);
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
     successfull = 0;
     failed = 0;
@@ -254,8 +255,7 @@ export class ApgSpcSpecifier {
    */
   static FinalReport() {
 
-    const eventMessage = `Successful: ${this._totalSuccessfull}, Failed: ${this._totalFailed}, Skipped: ${this._totalSkipped}`;
-
+  
     const successfull = Std.Colors.green(`${this._totalSuccessfull}`);
     const failed = Std.Colors.red(`${this._totalFailed}`);
     const skipped = Std.Colors.gray(`${this._totalSkipped}`);
@@ -294,13 +294,13 @@ export class ApgSpcSpecifier {
       `+${spacer}\n` +
       `| Mock init \n` +
       `+${spacer}\n`);
-    this.#log(resume);
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
     return Promise.resolve(event);
   }
 
 
-   MockInitSync(amessage = "") {
+  MockInitSync(amessage = "") {
     const event: IApgSpcEvent = {
       clause: eApgSpcClause.mockInit,
       message: amessage,
@@ -308,12 +308,12 @@ export class ApgSpcSpecifier {
     }
     this._events.push(event);
 
-     const spacer = ApgSpcSpecifier.SPACER;
+    const spacer = ApgSpcSpecifier.SPACER;
     const resume = Std.Colors.cyan(
       `+${spacer}\n` +
       `| Mock init \n` +
       `+${spacer}\n`);
-    this.#log(resume);
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
     return event;
   }
@@ -332,7 +332,7 @@ export class ApgSpcSpecifier {
       `+${spacer}\n` +
       `| Mock End \n` +
       `+${spacer}\n`);
-    this.#log(resume);
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
     return Promise.resolve(event);
   }
@@ -351,7 +351,7 @@ export class ApgSpcSpecifier {
       `+${spacer}\n` +
       `| Mock End \n` +
       `+${spacer}\n`);
-    this.#log(resume);
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
     return event;
   }
@@ -407,8 +407,7 @@ export class ApgSpcSpecifier {
       `+${spacer}\n` +
       `| ${JSON.stringify(r)}\n` +
       `+${spacer}\n`);
-    this.#log(resume);
-
+    this.#log(resume, Uts.eApgUtsLogMode.silent);
 
 
     return r;
