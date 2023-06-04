@@ -6,7 +6,7 @@
  * @version 0.9.7 [APG 2023/05/06] Separation of concerns lib/src
  * -----------------------------------------------------------------------
  */
-import { Uts, Std } from "../deps.ts"
+import { Uts } from "../deps.ts"
 import { IApgSpcEvent } from "../interfaces/IApgSpcEvent.ts"
 import { eApgSpcClause } from "../enums/eApgSpcClause.ts"
 import { eApgSpcRun } from "../enums/eApgSpcRun.ts";
@@ -38,12 +38,13 @@ export class ApgSpcSpecifier {
     this._logMode = amode;
   }
 
+  
   #log(amessage: string, aminLevel: Uts.eApgUtsLogMode) {
     if (this._logMode >= aminLevel) {
       console.log(amessage);
     }
   }
- 
+
 
   get Events() {
     return this._events;
@@ -87,7 +88,6 @@ export class ApgSpcSpecifier {
   }
 
 
-
   /**
    * Declares the beginning of a set of specs for the current object 
    */
@@ -100,10 +100,9 @@ export class ApgSpcSpecifier {
       hrt: performance.now()
     }
     this._events.push(event);
-    const message = (Std.Colors.yellow(`\n+${spacer}\n| ${atitle}\n+${spacer}`));
+    const message = (Uts.Std.Colors.yellow(`\n+${spacer}\n| ${atitle}\n+${spacer}`));
     console.log(message)
   }
-
 
 
   /**
@@ -146,7 +145,7 @@ export class ApgSpcSpecifier {
   ) {
 
     let message = amessage;
-    const res = Std.Colors.gray("       SKIPPED");
+    const res = Uts.Std.Colors.gray("       SKIPPED");
     if (amessage == "") {
       message = "This test was..."
     }
@@ -173,7 +172,7 @@ export class ApgSpcSpecifier {
     let res = "";
     if (asuccess === true) {
 
-      res = Std.Colors.green("       SUCCESS");
+      res = Uts.Std.Colors.green("       SUCCESS");
 
       const event: IApgSpcEvent = {
         clause: eApgSpcClause.success,
@@ -185,7 +184,7 @@ export class ApgSpcSpecifier {
     }
     else {
 
-      res = Std.Colors.red("       FAILURE");
+      res = Uts.Std.Colors.red("       FAILURE");
 
       const event: IApgSpcEvent = {
         clause: eApgSpcClause.failure,
@@ -197,6 +196,7 @@ export class ApgSpcSpecifier {
     }
     this.#log("|     " + message + "\n|" + res, Uts.eApgUtsLogMode.verbose);
   }
+
 
   /**
    * Resume of the current results. 
@@ -222,13 +222,13 @@ export class ApgSpcSpecifier {
     ApgSpcSpecifier._totalFailed += failed;
 
     const eventMessage = `Successful: ${successfull}, Failed: ${failed}, Skipped: ${skipped}`;
-    const successfullStamp = Std.Colors.green(`${successfull}`);
-    const failedStamp = Std.Colors.red(`${failed}`);
-    const skippedStamp = Std.Colors.gray(`${skipped}`);
+    const successfullStamp = Uts.Std.Colors.green(`${successfull}`);
+    const failedStamp = Uts.Std.Colors.red(`${failed}`);
+    const skippedStamp = Uts.Std.Colors.gray(`${skipped}`);
     const message = `Successful: ${successfullStamp}, Failed: ${failedStamp}, Skipped: ${skippedStamp}`;
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.yellow(
+    const resume = Uts.Std.Colors.yellow(
       `+${spacer}\n` +
       `| ${message} \n` +
       `+${spacer}\n`);
@@ -247,6 +247,7 @@ export class ApgSpcSpecifier {
     ApgSpcSpecifier._lastResumeIndex = this._events.length;
   }
 
+
   /**
    * Resumes the results of all the specs till the call to the specTitle() method.
    * It reports in a row the number of specs succesful, failed and skipped.
@@ -255,14 +256,13 @@ export class ApgSpcSpecifier {
    */
   static FinalReport() {
 
-  
-    const successfull = Std.Colors.green(`${this._totalSuccessfull}`);
-    const failed = Std.Colors.red(`${this._totalFailed}`);
-    const skipped = Std.Colors.gray(`${this._totalSkipped}`);
+    const successfull = Uts.Std.Colors.green(`${this._totalSuccessfull}`);
+    const failed = Uts.Std.Colors.red(`${this._totalFailed}`);
+    const skipped = Uts.Std.Colors.gray(`${this._totalSkipped}`);
     const message = `Successful: ${successfull}, Failed: ${failed}, Skipped: ${skipped}`;
 
     const spacer = this.SPACER;
-    const resume = Std.Colors.magenta(
+    const resume = Uts.Std.Colors.magenta(
       `+${spacer}\n` +
       `| Final resume \n` +
       `+${spacer}\n` +
@@ -277,10 +277,6 @@ export class ApgSpcSpecifier {
   }
 
 
-  /**
-   * 
-   * @returns 
-   */
   MockInit() {
     const event: IApgSpcEvent = {
       clause: eApgSpcClause.mockInit,
@@ -290,7 +286,7 @@ export class ApgSpcSpecifier {
     this._events.push(event);
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.cyan(
+    const resume = Uts.Std.Colors.cyan(
       `+${spacer}\n` +
       `| Mock init \n` +
       `+${spacer}\n`);
@@ -309,7 +305,7 @@ export class ApgSpcSpecifier {
     this._events.push(event);
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.cyan(
+    const resume = Uts.Std.Colors.cyan(
       `+${spacer}\n` +
       `| Mock init \n` +
       `+${spacer}\n`);
@@ -328,7 +324,7 @@ export class ApgSpcSpecifier {
     this._events.push(event);
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.cyan(
+    const resume = Uts.Std.Colors.cyan(
       `+${spacer}\n` +
       `| Mock End \n` +
       `+${spacer}\n`);
@@ -347,7 +343,7 @@ export class ApgSpcSpecifier {
     this._events.push(event);
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.cyan(
+    const resume = Uts.Std.Colors.cyan(
       `+${spacer}\n` +
       `| Mock End \n` +
       `+${spacer}\n`);
@@ -384,7 +380,7 @@ export class ApgSpcSpecifier {
       body,
     }
 
-    let r: any;
+    let r: unknown;
     try {
       const response = await fetch(auri, postParams);
       if (response.json) {
@@ -393,15 +389,21 @@ export class ApgSpcSpecifier {
       else {
         r = response;
       }
+
+      this.#log(JSON.stringify(r), Uts.eApgUtsLogMode.verbose);
     }
     catch (e) {
-      console.log("Error from the Deno Deploy Test service on " + auri);
-      console.error(e);
-      return e;
+
+      const basicMessage = Uts.Std.Colors.red("Error from the Deno Deploy Test service on " + auri);
+      this.#log(basicMessage, Uts.eApgUtsLogMode.quiet);
+      const verboseMessage = Uts.Std.Colors.red(JSON.stringify(e));
+      this.#log(verboseMessage, Uts.eApgUtsLogMode.verbose);
+
+      return false;
     }
 
     const spacer = ApgSpcSpecifier.SPACER;
-    const resume = Std.Colors.brightGreen(
+    const resume = Uts.Std.Colors.brightGreen(
       `+${spacer}\n` +
       `| Remote storage (${auri}) result\n` +
       `+${spacer}\n` +
@@ -410,10 +412,9 @@ export class ApgSpcSpecifier {
     this.#log(resume, Uts.eApgUtsLogMode.silent);
 
 
-    return r;
+    return true;
 
   }
-
 
 
   AreEqual(a: unknown, b: unknown): boolean {
@@ -426,11 +427,13 @@ export class ApgSpcSpecifier {
     return a === b;
   }
 
+
   IsNotUndefOrNull(a: unknown) {
     if (a === undefined) return false;
     if (a === null) return false;
     return true;
   }
+
 
   IsNotEmpty(a: string) {
     if (a !== "") return true;

@@ -5,8 +5,6 @@
  * -----------------------------------------------------------------------
 */
 
-export * as Std from "./deps/deno.land.std.ts";
-
 
 // Apg github repos
 export * as Uts from "https://raw.githubusercontent.com/Pangeli70/apg-uts/master/mod.ts";

@@ -76,7 +76,7 @@ export abstract class ApgSpcSpec extends Uts.ApgUtsBaseService {
     aframework: string,
     aspecs: string,
   ) {
-    await this.specifier.SendEventsToTestService(auri, aframework, aspecs);
+    return await this.specifier.SendEventsToTestService(auri, aframework, aspecs);
   }
 
 

@@ -11,3 +11,4 @@ export * from './classes/ApgSpcSpecifier.ts';
 export * from './classes/ApgSpcSpec.ts';
 
 export type { TApgSpcFlags } from './types/TApgSpcFlags.ts'
+export type { IApgSpcEvent } from './interfaces/IApgSpcEvent.ts';
