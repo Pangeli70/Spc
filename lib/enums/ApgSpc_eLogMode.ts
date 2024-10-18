@@ -1,12 +1,18 @@
 /** -----------------------------------------------------------------------
  * @module [ApgSpc]
- * @author [APG] Angeli Paolo Giusto
- * @version 0.9.7 [APG 2023/05/13] Separation of concerns lib/src
+ * @author [APG] ANGELI Paolo Giusto
  * @version 0.1 APG 20240921 Integration in Deno 2
  * -----------------------------------------------------------------------
+*/
+
+/**
+ * Flag to run or skip a spec log
  */
-
-
-/** Internal dependencies */
-
-export * from "./monorepo.ts";
+export enum ApgSpc_eLogMode {
+    /** No logs */
+    silent = 0,
+    /** Some logs */
+    quiet = 1,
+    /** All logs */
+    verbose = 2
+}

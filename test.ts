@@ -3,33 +3,63 @@
  * @author [APG] ANGELI Paolo Giusto
  * @version 0.9.2 [APG 2022/10/08] Github Beta
  * @version 0.9.7 [APG 2023/05/13] Separation of concerns lib/src
+ * @version 0.1 APG 20240921 Integration in Deno 2
  * ------------------------------------------------------------------------
  */
-import { Spc } from "./test/deps.ts";
-import { ApgSpcExampleSpec } from "./test/specs/ApgSpcExampleSpec.ts";
+import {
+    Spc
+} from "./test/deps.ts";
+import {
+    ApgSpc_Spec_ApgUts_Math
+} from "./test/specs/ApgSpc_Spec_ApgUts_Math.ts";
+import {
+    ApgSpc_Spec_ApgUts_Object
+} from "./test/specs/ApgSpc_Spec_ApgUts_Object.ts";
+
+
+// Remote test result browser service address 
+const RESULTS_BROWSER_URI = "https://apg-tst.deno.dev/store";
+
+// Current framework or library under test
+const FRAMEWORK = "ApgSpc";
+
 
 /** 
  * Use this test suite as an example to understand how to use the Spc framework
  * @param arun Include or exclude the entire test suite
  */
-async function ApgSpcExampleTestSuite(arun: Spc.eApgSpcRun) {
+async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
-    if (arun != Spc.eApgSpcRun.yes) return;
-    // Define the remote test result browser service address 
-    const URI = "https://apg-tst.deno.dev/store";
-    // Create the spec object
-    const testSpec = new ApgSpcExampleSpec();
+    if (arun != Spc.ApgSpc_eRun.yes) return;
 
-    // We still have the possibility to decide if run this specific spec inside this suite or not
-    if (testSpec.RunSync(Spc.eApgSpcRun.yes)) {
-        // try to send the result to the remote service
-        const _r1 = await testSpec.SendEventsToTestService(URI, "Spc", testSpec.CLASS_NAME);
+    const ApgUts_Object_Spec = new ApgSpc_Spec_ApgUts_Object();
+
+    if (ApgUts_Object_Spec.RunSync(Spc.ApgSpc_eRun.yes)) {
+        const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
+            RESULTS_BROWSER_URI,
+            FRAMEWORK,
+            ApgUts_Object_Spec.CLASS
+        );
+        if (r) Spc.ApgSpc_Service.ClearEvents();
+
     }
 
-    // Print a final report on the console
-    Spc.ApgSpcSpecifier.FinalReport();
+
+    const ApgUts_Math_Spec = new ApgSpc_Spec_ApgUts_Math();
+
+    if (ApgUts_Math_Spec.RunSync(Spc.ApgSpc_eRun.yes)) {
+        const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
+            RESULTS_BROWSER_URI,
+            FRAMEWORK,
+            ApgUts_Math_Spec.CLASS
+        );
+        if (r) Spc.ApgSpc_Service.ClearEvents();
+    }
+
+    
+    Spc.ApgSpc_Service.FinalReport();
 }
 
 
 // Run the test suite
-await ApgSpcExampleTestSuite(Spc.eApgSpcRun.yes);
+await ApgSpc_Suite(Spc.ApgSpc_eRun.yes);
