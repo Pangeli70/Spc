@@ -31,30 +31,28 @@ import {
  */
 export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
 
-    protected override initClassName(): string {
-        throw new Error(`Virtual abstract method ${this.initClassName.name} for child of ${ApgSpc_Base.name} is not implemented`);
-    }
-
 
     protected runFlags: ApgSpc_Recordset_TFlags = {}
 
     
-    /**
+    /** (Virtual abstract method)
+     * 
      * Method that will be overriden by the child classes to be called asyncronously.
      */
     protected execute(): Promise<void> {
         return new Promise<void>(() => {
-            throw new Error(`If you want to call method [${this.execute.name}] you must override the implementation.`)
+            Uts.ApgUts.CalledVirtualAbstractSoExit(this.NAME, this.execute.name)
         })
     }
 
 
 
-    /**
+    /** (Virtual abstract method)
+     * 
      * Method that will be overriden by the child classes to be called syncronously.
      */
     protected executeSync(): void {
-        throw new Error(`If you want to call method [${this.executeSync.name}] method you must override the implementation.`)
+        Uts.ApgUts.CalledVirtualAbstractSoExit(this.NAME, this.executeSync.name)
     }
 
 
@@ -62,7 +60,7 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
     async Run(arun: ApgSpc_eRun) {
 
         if (arun == ApgSpc_eRun.no) return false;
-        ApgSpc_Service.Title(this.CLASS);
+        ApgSpc_Service.Title(this.NAME);
         let r = await this.mockInit();
         if (r.ok) {
             await this.execute();
@@ -75,7 +73,7 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
 
     RunSync(arun: ApgSpc_eRun) {
         if (arun == ApgSpc_eRun.no) return false;
-        ApgSpc_Service.Title(this.CLASS);
+        ApgSpc_Service.Title(this.NAME);
         let r = this.mockInitSync()
         if (r.ok) {
             this.executeSync();
