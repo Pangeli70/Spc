@@ -53,7 +53,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         this._logMode = amode;
     }
 
-    static get Events() {
+    static get SpecEvents() {
         return this._specEvents;
     }
 
