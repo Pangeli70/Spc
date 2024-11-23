@@ -32,7 +32,7 @@ import {
 export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
 
 
-    protected runFlags: ApgSpc_Recordset_TFlags = {}
+    protected runFlags: ApgSpc_Recordset_TFlags = {};
 
     
     /** (Virtual abstract method)
@@ -43,16 +43,6 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
         return new Promise<void>(() => {
             Uts.ApgUts.CalledVirtualAbstractSoExit(this.NAME, this.execute.name)
         })
-    }
-
-
-
-    /** (Virtual abstract method)
-     * 
-     * Method that will be overriden by the child classes to be called syncronously.
-     */
-    protected executeSync(): void {
-        Uts.ApgUts.CalledVirtualAbstractSoExit(this.NAME, this.executeSync.name)
     }
 
 
@@ -71,19 +61,6 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
 
 
 
-    RunSync(arun: ApgSpc_eRun) {
-        if (arun == ApgSpc_eRun.no) return false;
-        ApgSpc_Service.Title(this.NAME);
-        let r = this.mockInitSync()
-        if (r.ok) {
-            this.executeSync();
-            r = this.mockEndSync();
-        }
-        return r.ok;
-    }
-
-
-
     async SendEventsToTestService(
         auri: string,
         aframework: string,
@@ -92,7 +69,7 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
         return await ApgSpc_Service.SendEventsToResultsBrowser(auri, aframework, aspecs);
     }
 
-    
+
 
     async mockInit() {
         const r = new Uts.ApgUts_Result<ApgSpc_IEvent>();
@@ -109,20 +86,6 @@ export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
     }
 
 
-
-    mockInitSync() {
-        const r = new Uts.ApgUts_Result<ApgSpc_IEvent>();
-        r.setPayload(ApgSpc_Service.MockInitSync(), ApgSpc_IEvent_Signature)
-        return r
-    }
-
-
-
-    mockEndSync() {
-        const r = new Uts.ApgUts_Result<ApgSpc_IEvent>();
-        r.setPayload(ApgSpc_Service.MockEndSync(), ApgSpc_IEvent_Signature)
-        return r
-    }
 
 }
 

@@ -41,21 +41,22 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     private static _totalSkipped = 0;
     private static _lastResumeIndex = 0;
 
+    private static _current: string = "";
     private static _specEvents: ApgSpc_IEvent[] = [];
-    private static _specs: ApgSpc_Recordset_TFlags = {}
+    private static _specsFlags: ApgSpc_Recordset_TFlags = {}
     private static _logMode: ApgSpc_eLogMode = ApgSpc_eLogMode.verbose;
 
 
-    static get Mode() {
+    static get LogMode() {
         return this._logMode;
     }
-    static set Mode(amode: ApgSpc_eLogMode) {
+    static set LogMode(amode: ApgSpc_eLogMode) {
         this._logMode = amode;
     }
-
     static get SpecEvents() {
         return this._specEvents;
     }
+
 
 
     static #log(amessage: string, aminLevel: ApgSpc_eLogMode) {
@@ -65,41 +66,45 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     }
 
 
+
     /**
      * Initializes the spec
      */
     static Init(
         afunction: Function,
         aflags: ApgSpc_Recordset_TFlags,
-        alogMode = ApgSpc_eLogMode.verbose
     ) {
 
-        const fname = afunction.name;
-        this._specs = aflags;
-        this._logMode = alogMode;
+        this._current = afunction.name;
+        this._specsFlags = aflags;
 
         const event: ApgSpc_IEvent = {
             clause: ApgSpc_eClause.init,
-            message: fname,
+            message: this._current,
             hrt: performance.now()
         }
         this._specEvents.push(event);
-        const message = ("\n+-" + fname + "\n|");
+        const message = ("\n+-" + this._current + "\n|");
         console.log(message);
+    }
 
-        const run = (this._specs[fname]);
+
+
+    static DoSkip() { 
+        const run = (this._specsFlags[this._current]);
         let msg = ""
         if (run === undefined) {
-            msg = `Trying to initialize the spec [${fname}] but it is not registered in the flags object`;
+            msg = `Trying to initialize the spec [${this._current}] but it is not registered in the flags object`;
             this.Skip(msg);
-            return false;
+            return true;
         }
         if (run == ApgSpc_eRun.no) {
             this.Skip(msg);
-            return false;
+            return true;
         }
-        return true;
-    }
+        return false;
+    } 
+
 
 
     /**
@@ -143,6 +148,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     }
 
 
+
     /**
      * Spec expectation: use this method to declare the expected result
      */
@@ -157,6 +163,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         this._specEvents.push(event);
         return this;
     }
+
 
 
     /**
@@ -184,6 +191,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         this._specEvents.push(event);
         return this;
     }
+
 
 
     /**
@@ -236,6 +244,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     }
 
 
+
     /**
      * Resume of the current results. 
      * It is used to close a group of related specs started with the call to the Init() method.
@@ -286,6 +295,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     }
 
 
+
     /**
      * Resumes the results of all the specs till the call to the specTitle() method.
      * It reports in a row the number of specs succesful, failed and skipped.
@@ -317,6 +327,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
     }
 
 
+
     static MockInit() {
         const event: ApgSpc_IEvent = {
             clause: ApgSpc_eClause.mockInit,
@@ -334,28 +345,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         this.#log(resume, ApgSpc_eLogMode.silent);
 
         return Promise.resolve(event);
-    }
-
-
-
-    static MockInitSync(amessage = "") {
-        const event: ApgSpc_IEvent = {
-            clause: ApgSpc_eClause.mockInit,
-            message: amessage,
-            hrt: performance.now()
-        }
-        const timeStamp = new Date().toLocaleString();
-
-        this._specEvents.push(event);
-
-        const spacer = ApgSpc_Service.SPACER;
-        const resume = Uts.Std.Colors.cyan(
-            `+${spacer}\n` +
-            `| Mock init (${timeStamp})\n` +
-            `+${spacer}\n`);
-        this.#log(resume, ApgSpc_eLogMode.silent);
-
-        return event;
     }
 
 
@@ -381,28 +370,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         return Promise.resolve(event);
     }
 
-
-
-    static MockEndSync(amessage = "") {
-
-        const timeStamp = new Date().toLocaleString();
-
-        const event: ApgSpc_IEvent = {
-            clause: ApgSpc_eClause.mockEnd,
-            message: amessage,
-            hrt: performance.now()
-        }
-        this._specEvents.push(event);
-
-        const spacer = ApgSpc_Service.SPACER;
-        const resume = Uts.Std.Colors.cyan(
-            `+${spacer}\n` +
-            `| Mock End \n` +
-            `+${spacer}\n`);
-        this.#log(resume, ApgSpc_eLogMode.silent);
-
-        return event;
-    }
 
 
     static async SendEventsToResultsBrowser(

@@ -37,8 +37,8 @@ export class ApgSpc_Spec_ApgUts_Object extends Spc.ApgSpc_Base {
     S01_IndirectAccessToProps() {
 
         const spec = Spc.ApgSpc_Service;
-        const run = spec.Init(this.S01_IndirectAccessToProps, this.runFlags);
-        if (!run) return;
+        spec.Init(this.S01_IndirectAccessToProps, this.runFlags);
+        if (spec.DoSkip()) return;
         
         const obj = Uts.ApgUts_Object;
 
@@ -111,8 +111,8 @@ export class ApgSpc_Spec_ApgUts_Object extends Spc.ApgSpc_Base {
     S02_DeepCompare() {
 
         const spec = Spc.ApgSpc_Service;
-        const run = spec.Init(this.S02_DeepCompare, this.runFlags);
-        if (!run) return;
+        spec.Init(this.S02_DeepCompare, this.runFlags);
+        if (spec.DoSkip()) return;
 
         const obj = Uts.ApgUts_Object;
         
@@ -169,9 +169,10 @@ export class ApgSpc_Spec_ApgUts_Object extends Spc.ApgSpc_Base {
     }
 
 
-    override executeSync() {
+    override async execute() {
         this.S01_IndirectAccessToProps();
         this.S02_DeepCompare();
+        await Promise.resolve();
     }
 
 

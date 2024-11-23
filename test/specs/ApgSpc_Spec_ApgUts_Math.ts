@@ -26,11 +26,12 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
     }
 
 
+
     S01_GetRandomInRange() {
 
         const spec = Spc.ApgSpc_Service;
-        const run = spec.Init(this.S01_GetRandomInRange, this.runFlags);
-        if (!run) return;
+        spec.Init(this.S01_GetRandomInRange, this.runFlags);
+        if (spec.DoSkip()) return;
         
         const lib = Uts.ApgUts_Math;
 
@@ -78,8 +79,8 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
     S02_RoundCeilAndFloorAdjusted() {
 
         const spec = Spc.ApgSpc_Service;
-        const run = spec.Init(this.S02_RoundCeilAndFloorAdjusted, this.runFlags);
-        if (!run) return;
+        spec.Init(this.S02_RoundCeilAndFloorAdjusted, this.runFlags);
+        if (spec.DoSkip()) return;
         
         const lib = Uts.ApgUts_Math;
 
@@ -133,9 +134,11 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
     }
 
 
-    override executeSync() {
+
+    override async execute() {
         this.S01_GetRandomInRange();
         this.S02_RoundCeilAndFloorAdjusted();
+        await Promise.resolve()
     }
 
 }

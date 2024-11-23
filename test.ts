@@ -34,7 +34,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
     const ApgUts_Object_Spec = new ApgSpc_Spec_ApgUts_Object();
 
-    if (ApgUts_Object_Spec.RunSync(Spc.ApgSpc_eRun.yes)) {
+    if (await ApgUts_Object_Spec.Run(Spc.ApgSpc_eRun.yes)) {
         const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
@@ -47,7 +47,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
     const ApgUts_Math_Spec = new ApgSpc_Spec_ApgUts_Math();
 
-    if (ApgUts_Math_Spec.RunSync(Spc.ApgSpc_eRun.yes)) {
+    if (await ApgUts_Math_Spec.Run(Spc.ApgSpc_eRun.yes)) {
         const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
