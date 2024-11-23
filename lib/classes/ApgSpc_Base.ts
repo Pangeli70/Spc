@@ -29,12 +29,14 @@ import {
 /**
  * Abstract service with testing capabilities
  */
-export abstract class ApgSpc_Base  extends Uts.ApgUts_Class {
+export abstract class ApgSpc_Base extends Uts.ApgUts_Class {
 
 
     protected runFlags: ApgSpc_Recordset_TFlags = {};
 
-    
+    get flags() { return this.runFlags; }
+
+
     /** (Virtual abstract method)
      * 
      * Method that will be overriden by the child classes to be called asyncronously.
