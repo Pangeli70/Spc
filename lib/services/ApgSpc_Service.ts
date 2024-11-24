@@ -76,8 +76,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         aflags: ApgSpc_Recordset_TFlags,
     ) {
 
-        this.Reset();
-
         this._current = afunction.name;
         this._specsFlags = aflags;
 
@@ -301,13 +299,23 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
      * It should be called after the last specResume() call
      * The total counters are reset.
      */
-    static FinalReport() {
+    static FinalReport(aresults: ApgSpc_TSpecResult[]) {
+
+        let totalSuccessfull = 0;
+        let totalFailed = 0;
+        let totalSkipped = 0;
+
+        for (const result of aresults) {
+            totalSuccessfull += result.successfull;
+            totalFailed += result.failed;
+            totalSkipped += result.skipped;
+        }
 
         const timeStamp = new Date().toLocaleString();
 
-        const successfull = Uts.Std.Colors.green(`${this._totalSuccessfull}`);
-        const failed = Uts.Std.Colors.red(`${this._totalFailed}`);
-        const skipped = Uts.Std.Colors.gray(`${this._totalSkipped}`);
+        const successfull = Uts.Std.Colors.green(`${totalSuccessfull}`);
+        const failed = Uts.Std.Colors.red(`${totalFailed}`);
+        const skipped = Uts.Std.Colors.gray(`${totalSkipped}`);
         const message = `Successful: ${successfull}, Failed: ${failed}, Skipped: ${skipped}`;
 
         const spacer = this.SPACER;
@@ -318,7 +326,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
             `| ${message}\n` +
             `+${spacer}\n`);
         console.log(resume);
-
 
     }
 

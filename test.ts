@@ -30,34 +30,42 @@ const FRAMEWORK = "ApgSpc";
  */
 async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
+    const results: Spc.ApgSpc_TSpecResult[] = [];
+
     if (arun != Spc.ApgSpc_eRun.yes) return;
 
     const ApgUts_Object_Spec = new ApgSpc_Spec_ApgUts_Object();
 
-    if (await ApgUts_Object_Spec.Run(Spc.ApgSpc_eRun.yes)) {
+    const r1 = await ApgUts_Object_Spec.Run(Spc.ApgSpc_eRun.yes)
+
+    if (r1) {
+        results.push(Spc.ApgSpc_Service.Result());
         const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
             ApgUts_Object_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.Reset();
-
+        Spc.ApgSpc_Service.Reset();
     }
 
 
     const ApgUts_Math_Spec = new ApgSpc_Spec_ApgUts_Math();
 
-    if (await ApgUts_Math_Spec.Run(Spc.ApgSpc_eRun.yes)) {
+    const r2 = await ApgUts_Math_Spec.Run(Spc.ApgSpc_eRun.yes)
+
+    if (r2) {
+        results.push(Spc.ApgSpc_Service.Result());
         const r = await Spc.ApgSpc_Service.SendEventsToResultsBrowser(
             RESULTS_BROWSER_URI,
             FRAMEWORK,
             ApgUts_Math_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.Reset();
+        Spc.ApgSpc_Service.Reset();
     }
 
     
-    Spc.ApgSpc_Service.FinalReport();
+    Spc.ApgSpc_Service.FinalReport(results);
+    console.dir(results);
 }
 
 

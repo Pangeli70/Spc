@@ -90,7 +90,7 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
         let val = lib.Round(value, 0);
         let exp = 111;
         spec
-            .When(`trying to round the number [${value}] with 10e[${figures}] figures`)
+            .When(`trying to round the number [${value}] with [${figures}] figures`)
             .WeExpect(`to get [${exp}]`)
             .WeGot(`[${val}]`, (val == exp));
         
@@ -99,7 +99,7 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
         val = lib.Round(value, figures);
         exp = 111.005;
         spec
-            .When(`trying to round the number [${value}] with 10e[${figures}] figures`)
+            .When(`trying to round the number [${value}] with [${figures}] figures`)
             .WeExpect(`to get [${exp}]`)
             .WeGot(`[${val}]`, (val == exp));
 
@@ -108,7 +108,7 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
         val = lib.Round(value, figures);
         exp = 110;
         spec
-            .When(`trying to round the number [${value}] with 10e[${figures}] figures`)
+            .When(`trying to round the number [${value}] with [${figures}] figures`)
             .WeExpect(`to get [${exp}]`)
             .WeGot(`[${val}]`, (val == exp));
         
@@ -117,7 +117,7 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
         val = lib.Ceil(value, figures);
         exp = 111.006;
         spec
-            .When(`trying to ceil the number [${value}] with 10e[${figures}] figures`)
+            .When(`trying to ceil the number [${value}] with [${figures}] figures`)
             .WeExpect(`to get [${exp}]`)
             .WeGot(`[${val}]`, (val == exp));
         
@@ -126,7 +126,7 @@ export class ApgSpc_Spec_ApgUts_Math extends Spc.ApgSpc_Base {
         val = lib.Floor(value, figures);
         exp = 111.0054;
         spec
-            .When(`trying to floor the number [${value}] with 10e[${figures}] figures`)
+            .When(`trying to floor the number [${value}] with [${figures}] figures`)
             .WeExpect(`to get [${exp}]`)
             .WeGot(`[${val}]`, (val == exp));
 
