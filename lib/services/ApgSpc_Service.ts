@@ -23,7 +23,8 @@ import {
     ApgSpc_IEvent
 } from "../interfaces/ApgSpc_IEvent.ts";
 import {
-    ApgSpc_Recordset_TFlags
+    ApgSpc_Recordset_TFlags,
+    ApgSpc_TSpecResult
 } from "../types/ApgSpc_Types.ts";
 
 
@@ -444,14 +445,17 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
 
 
 
-    static Status() {
+    static Result() {
 
-        return {
+        const r: ApgSpc_TSpecResult = {
+            execution: new Date(),
             total: this._totalSuccessfull + this._totalSkipped + this._totalFailed,
             successfull: this._totalSuccessfull,
             skipped: this._totalSkipped,
-            failed: this._totalFailed
+            failed: this._totalFailed,
+            events: [...this._specEvents]
         }
+        return r;
     }
 
 

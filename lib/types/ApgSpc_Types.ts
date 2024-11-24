@@ -20,8 +20,15 @@ import {
 export type ApgSpc_Recordset_TFlags = Record<string, ApgSpc_eRun>;
 
 
+
+
+
 export type ApgSpc_TSpecResult = {
     execution: Date,
+    total: number,
+    successfull: number,
+    skipped: number,
+    failed: number,
     events: ApgSpc_IEvent[]
 }
 
