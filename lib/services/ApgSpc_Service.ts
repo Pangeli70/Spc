@@ -75,6 +75,8 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
         aflags: ApgSpc_Recordset_TFlags,
     ) {
 
+        this.Reset();
+
         this._current = afunction.name;
         this._specsFlags = aflags;
 
@@ -90,7 +92,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
 
 
 
-    static DoSkip() { 
+    static DoSkip() {
         const run = (this._specsFlags[this._current]);
         let msg = ""
         if (run === undefined) {
@@ -103,7 +105,7 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
             return true;
         }
         return false;
-    } 
+    }
 
 
 
@@ -281,10 +283,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
             `+${spacer}\n`);
         this.#log(resume, ApgSpc_eLogMode.silent);
 
-        successfull = 0;
-        failed = 0;
-        skipped = 0;
-
         const event: ApgSpc_IEvent = {
             clause: ApgSpc_eClause.resume,
             message: eventMessage,
@@ -320,9 +318,6 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
             `+${spacer}\n`);
         console.log(resume);
 
-        this._totalSuccessfull = 0;
-        this._totalSkipped = 0;
-        this._totalFailed = 0;
 
     }
 
@@ -436,10 +431,30 @@ export class ApgSpc_Service extends Uts.ApgUts_Service {
 
 
 
-    static ClearEvents() {
+    static Reset() {
 
+        this._totalSuccessfull = 0;
+        this._totalSkipped = 0;
+        this._totalFailed = 0;
+        this._current = "";
+        this._lastResumeIndex = 0;
         this._specEvents = [];
+        this._specsFlags = {};
     }
+
+
+
+    static Status() {
+
+        return {
+            total: this._totalSuccessfull + this._totalSkipped + this._totalFailed,
+            successfull: this._totalSuccessfull,
+            skipped: this._totalSkipped,
+            failed: this._totalFailed
+        }
+    }
+
+
 
 }
 

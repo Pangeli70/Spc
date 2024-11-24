@@ -40,7 +40,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
             FRAMEWORK,
             ApgUts_Object_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.ClearEvents();
+        if (r) Spc.ApgSpc_Service.Reset();
 
     }
 
@@ -53,7 +53,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
             FRAMEWORK,
             ApgUts_Math_Spec.NAME
         );
-        if (r) Spc.ApgSpc_Service.ClearEvents();
+        if (r) Spc.ApgSpc_Service.Reset();
     }
 
     
