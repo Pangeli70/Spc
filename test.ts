@@ -65,7 +65,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
     
     Spc.ApgSpc_Service.FinalReport(results);
-    console.dir(results);
+
 }
 
 
