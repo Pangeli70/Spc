@@ -6,15 +6,9 @@
  * @version 0.1 APG 20240921 Integration in Deno 2
  * ------------------------------------------------------------------------
  */
-import {
-    Spc
-} from "./test/deps.ts";
-import {
-    ApgSpc_Spec_ApgUts_Math
-} from "./test/specs/ApgSpc_Spec_ApgUts_Math.ts";
-import {
-    ApgSpc_Spec_ApgUts_Object
-} from "./test/specs/ApgSpc_Spec_ApgUts_Object.ts";
+import {Spc} from "./test/deps.ts";
+import {ApgSpc_Spec_ApgUts_Math} from "./test/specs/ApgSpc_Spec_ApgUts_Math.ts";
+import {ApgSpc_Spec_ApgUts_Object} from "./test/specs/ApgSpc_Spec_ApgUts_Object.ts";
 
 
 // Remote test result browser service address 

@@ -8,12 +8,8 @@
  */
 
 import { Spc, Uts } from "../deps.ts";
-import {
-    ApgUts_Object_DeepCompare_Data
-} from "./data/ApgUts_Object_DeepCompare_Data.ts";
-import {
-    ApgUts_Object_Indirect_Data
-} from "./data/ApgUts_Object_Indirect_Data.ts";
+import {ApgUts_Object_DeepCompare_Data} from "./data/ApgUts_Object_DeepCompare_Data.ts";
+import {ApgUts_Object_Indirect_Data} from "./data/ApgUts_Object_Indirect_Data.ts";
 
 
 export class ApgSpc_Spec_ApgUts_Object extends Spc.ApgSpc_Base {

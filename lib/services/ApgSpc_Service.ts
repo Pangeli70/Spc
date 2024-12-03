@@ -7,25 +7,13 @@
  * @version 0.1 APG 20240921 Integration in Deno 2
  * -----------------------------------------------------------------------
  */
-import {
-    Uts
-} from "../deps.ts";
-import {
-    ApgSpc_eClause
-} from "../enums/ApgSpc_eClause.ts";
-import {
-    ApgSpc_eLogMode
-} from "../enums/ApgSpc_eLogMode.ts";
-import {
-    ApgSpc_eRun
-} from "../enums/ApgSpc_eRun.ts";
-import {
-    ApgSpc_IEvent
-} from "../interfaces/ApgSpc_IEvent.ts";
-import {
-    ApgSpc_Recordset_TFlags,
-    ApgSpc_TSpecResult
-} from "../types/ApgSpc_Types.ts";
+import {Uts} from "../deps.ts";
+import {ApgSpc_eClause} from "../enums/ApgSpc_eClause.ts";
+import {ApgSpc_eLogMode} from "../enums/ApgSpc_eLogMode.ts";
+import {ApgSpc_eRun} from "../enums/ApgSpc_eRun.ts";
+import {ApgSpc_IEvent} from "../interfaces/ApgSpc_IEvent.ts";
+import {ApgSpc_Recordset_TFlags,
+    ApgSpc_TSpecResult} from "../types/ApgSpc_Types.ts";
 
 
 

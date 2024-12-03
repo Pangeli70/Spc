@@ -6,9 +6,7 @@
  * @version 0.1 APG 20240921 Integration in Deno 2
  * -----------------------------------------------------------------------
 */
-import {
-    ApgSpc_eClause
-} from "../enums/ApgSpc_eClause.ts"
+import {ApgSpc_eClause} from "../enums/ApgSpc_eClause.ts"
 
 
 export const ApgSpc_IEvent_Signature =  "ApgSpc_IEvent_Signature";

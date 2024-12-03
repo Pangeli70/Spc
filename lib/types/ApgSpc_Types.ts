@@ -6,15 +6,9 @@
  * @version 1.0.1 APG 20241124 Porting types from Edr_Tst
  * ------------------------------------------------------------------------
 */
-import {
-    ApgSpc_Base
-} from "../classes/ApgSpc_Base.ts";
-import {
-    ApgSpc_eRun
-} from "../enums/ApgSpc_eRun.ts";
-import {
-    ApgSpc_IEvent
-} from "../interfaces/ApgSpc_IEvent.ts";
+import {ApgSpc_Base} from "../classes/ApgSpc_Base.ts";
+import {ApgSpc_eRun} from "../enums/ApgSpc_eRun.ts";
+import {ApgSpc_IEvent} from "../interfaces/ApgSpc_IEvent.ts";
 
 
 export type ApgSpc_Recordset_TFlags = Record<string, ApgSpc_eRun>;

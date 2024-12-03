@@ -8,21 +8,11 @@
  * -----------------------------------------------------------------------
  */
 
-import {
-    Uts
-} from "../deps.ts";
-import {
-    ApgSpc_Recordset_TFlags
-} from "../types/ApgSpc_Types.ts";
-import {
-    ApgSpc_Service
-} from "../services/ApgSpc_Service.ts";
-import {
-    ApgSpc_eRun
-} from "../enums/ApgSpc_eRun.ts";
-import {
-    ApgSpc_IEvent, ApgSpc_IEvent_Signature
-} from "../interfaces/ApgSpc_IEvent.ts";
+import {Uts} from "../deps.ts";
+import {ApgSpc_Recordset_TFlags} from "../types/ApgSpc_Types.ts";
+import {ApgSpc_Service} from "../services/ApgSpc_Service.ts";
+import {ApgSpc_eRun} from "../enums/ApgSpc_eRun.ts";
+import {ApgSpc_IEvent, ApgSpc_IEvent_Signature} from "../interfaces/ApgSpc_IEvent.ts";
 
 
 
