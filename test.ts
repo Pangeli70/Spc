@@ -9,8 +9,7 @@
 
 
 import { Spc } from "./test/deps.ts";
-import { ApgSpc_Spec_ApgUts_Math } from "./test/specs/ApgSpc_Spec_ApgUts_Math.ts";
-import { ApgSpc_Spec_ApgUts_Object } from "./test/specs/ApgSpc_Spec_ApgUts_Object.ts";
+import { Specs } from "./specs.ts";
 
 
 // Todo This is deprecated sooner or later remove it --APG 20241224
@@ -33,7 +32,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
 
     const results: Spc.ApgSpc_TSpecResult[] = [];
 
-    const ApgUts_Object_Spec = new ApgSpc_Spec_ApgUts_Object();
+    const ApgUts_Object_Spec = new Specs.ApgSpc_Spec_ApgUts_Object();
     const r1 = await ApgUts_Object_Spec.Run(Spc.ApgSpc_eRun.yes)
 
     if (r1) {
@@ -50,7 +49,7 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
     }
 
 
-    const ApgUts_Math_Spec = new ApgSpc_Spec_ApgUts_Math();
+    const ApgUts_Math_Spec = new Specs.ApgSpc_Spec_ApgUts_Math();
     const r2 = await ApgUts_Math_Spec.Run(Spc.ApgSpc_eRun.yes)
 
     if (r2) {
@@ -70,6 +69,8 @@ async function ApgSpc_Suite(arun: Spc.ApgSpc_eRun) {
     Spc.ApgSpc_Service.FinalReport(results);
 
 }
+
+
 
 
 // Run the test suite
