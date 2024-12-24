@@ -1,16 +1,16 @@
 /** -----------------------------------------------------------------------
- * @module [apg-uts]
+ * @module [ApgSpc]
  * @author [APG] ANGELI Paolo Giusto
  * @version 0.9.2 [APG 2022/10/08] Github Beta
  * @version 0.9.7 [APG 2023/05/13] Separation of concerns lib/src
- * @version 0.1 APG 20240921 Integration in Deno 2
+ * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
  * ------------------------------------------------------------------------
  */
 import {Spc} from "./test/deps.ts";
 import {ApgSpc_Spec_ApgUts_Math} from "./test/specs/ApgSpc_Spec_ApgUts_Math.ts";
 import {ApgSpc_Spec_ApgUts_Object} from "./test/specs/ApgSpc_Spec_ApgUts_Object.ts";
 
-
+// Todo This is deprecated sooner or later remove it --APG 20241224
 // Remote test result browser service address 
 const RESULTS_BROWSER_URI = "https://apg-tst.deno.dev/store";
 

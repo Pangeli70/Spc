@@ -4,16 +4,18 @@
  * @version 0.8.0 [APG 2022/06/26] Removing Rhum
  * @version 0.9.2 [APG 2022/10/02] Github Beta
  * @version 0.9.7 [APG 2023/05/06] Separation of concerns lib/src
- * @version 0.1 APG 20240921 Integration in Deno 2
+ * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
  * -----------------------------------------------------------------------
  */
-import {Uts} from "../deps.ts";
-import {ApgSpc_eClause} from "../enums/ApgSpc_eClause.ts";
-import {ApgSpc_eLogMode} from "../enums/ApgSpc_eLogMode.ts";
-import {ApgSpc_eRun} from "../enums/ApgSpc_eRun.ts";
-import {ApgSpc_IEvent} from "../interfaces/ApgSpc_IEvent.ts";
-import {ApgSpc_Recordset_TFlags,
-    ApgSpc_TSpecResult} from "../types/ApgSpc_Types.ts";
+import { Uts } from "../deps.ts";
+import { ApgSpc_eClause } from "../enums/ApgSpc_eClause.ts";
+import { ApgSpc_eLogMode } from "../enums/ApgSpc_eLogMode.ts";
+import { ApgSpc_eRun } from "../enums/ApgSpc_eRun.ts";
+import { ApgSpc_IEvent } from "../interfaces/ApgSpc_IEvent.ts";
+import {
+    ApgSpc_Recordset_TFlags,
+    ApgSpc_TSpecResult
+} from "../types/ApgSpc_Types.ts";
 
 
 

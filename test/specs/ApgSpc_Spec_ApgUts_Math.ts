@@ -1,7 +1,7 @@
 /** -----------------------------------------------------------------------
  * @module [ApgSpc-ApgUts_Math]
  * @author [APG] ANGELI Paolo Giusto
- * @version 0.1 APG 20240921 Integration in Deno 2
+ * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
  * ------------------------------------------------------------------------
  */
 

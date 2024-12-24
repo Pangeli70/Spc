@@ -1,6 +1,8 @@
 /** -----------------------------------------------------------------------
- * @module [apg-spc] Testing and Specifications 
+ * @module [ApgSpc] 
+ * @description Specifications to test specifications :D
  * @author [APG] ANGELI Paolo Giusto
+ * @version 1.0.0 [APG 2024/12/24] Moving to Deno 2
  * ------------------------------------------------------------------------
  */
 
