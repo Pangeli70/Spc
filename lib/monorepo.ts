@@ -1,6 +1,6 @@
 /** ---------------------------------------------------------------------------
  * @module [ApgSpc]
- * @author [APG] Angeli Paolo Giusto 
+ * @author [APG] ANGELI Paolo Giusto 
  * @description Librerie del monorepo
  * @version 1.0.0 [APG 2024/09/21] Moving to Deno 2
  * ----------------------------------------------------------------------------
